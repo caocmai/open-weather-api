@@ -14,6 +14,8 @@
 		2C00E75D2487FF710019DD7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C00E75C2487FF710019DD7C /* Assets.xcassets */; };
 		2C00E7602487FF710019DD7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C00E75E2487FF710019DD7C /* LaunchScreen.storyboard */; };
 		2C9E29142488015600FB0387 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E29132488015600FB0387 /* NetworkLayer.swift */; };
+		2C9E29172488040000FB0387 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E29162488040000FB0387 /* Weather.swift */; };
+		2C9E29192488040700FB0387 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E29182488040700FB0387 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		2C00E75F2487FF710019DD7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C00E7612487FF710019DD7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C9E29132488015600FB0387 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		2C9E29162488040000FB0387 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		2C9E29182488040700FB0387 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			children = (
 				2C00E7532487FF6F0019DD7C /* AppDelegate.swift */,
 				2C00E7552487FF6F0019DD7C /* SceneDelegate.swift */,
+				2C9E291A2488040E00FB0387 /* Model */,
+				2C9E291B2488041400FB0387 /* Secret */,
 				2C9E29152488015B00FB0387 /* Network */,
 				2C9E29122488013E00FB0387 /* Controller */,
 				2C00E7592487FF6F0019DD7C /* Main.storyboard */,
@@ -84,6 +90,22 @@
 				2C9E29132488015600FB0387 /* NetworkLayer.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		2C9E291A2488040E00FB0387 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C9E29162488040000FB0387 /* Weather.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2C9E291B2488041400FB0387 /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+				2C9E29182488040700FB0387 /* API.swift */,
+			);
+			path = Secret;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +183,8 @@
 				2C00E7582487FF6F0019DD7C /* ViewController.swift in Sources */,
 				2C00E7542487FF6F0019DD7C /* AppDelegate.swift in Sources */,
 				2C00E7562487FF6F0019DD7C /* SceneDelegate.swift in Sources */,
+				2C9E29192488040700FB0387 /* API.swift in Sources */,
+				2C9E29172488040000FB0387 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
