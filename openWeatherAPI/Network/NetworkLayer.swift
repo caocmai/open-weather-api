@@ -6,9 +6,14 @@
 //  Copyright © 2020 Make School. All rights reserved.
 //
 
-//http://www.api.openweathermap.org/data/2.5//weather?q=London&appid=d072d1f873cfe8c47504da0394e43466
+//http://api.openweathermap.org/data/2.5//weather?q=London&appid=d072d1f873cfe8c47504da0394e43466
 
 import Foundation
+
+enum API: String {
+    case apiKey = "d072d1f873cfe8c47504da0394e43466"
+}
+
 
 class NetworkLayer {
     
@@ -42,7 +47,8 @@ class NetworkLayer {
         func getParams() -> [String:String] {
             switch self {
             case .currentWeather(let city):
-                return ["q": city
+                return ["q": city,
+                        "units": "imperial"
                         ]
             }
             
@@ -80,7 +86,7 @@ class NetworkLayer {
         
     }
     
-    func getWeatherData(passedInQuery: String, _ completion: @escaping (Result<Weather>) -> Void)  {
+    func getWeatherData(passedInQuery: String, _ completion: @escaping (Result<WeatherData>) -> Void)  {
         let articleRequest = makeRequest(for: .currentWeather(q: passedInQuery))
         print(articleRequest)
         
@@ -106,7 +112,7 @@ class NetworkLayer {
                 
             }
             // To decode data
-            guard let result = try? JSONDecoder().decode(Weather.self, from: safeData) else {
+            guard let result = try? JSONDecoder().decode(WeatherData.self, from: safeData) else {
                 return completion(Result.failure(EndPointError.couldNotParse))
             }
             
