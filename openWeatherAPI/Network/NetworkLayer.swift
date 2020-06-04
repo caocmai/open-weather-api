@@ -10,16 +10,12 @@
 
 import Foundation
 
-enum API: String {
-    case apiKey = "d072d1f873cfe8c47504da0394e43466"
-}
-
 
 class NetworkLayer {
     
     let baseURL = "http://api.openweathermap.org/data/2.5/"
     let urlSession = URLSession.shared
-    let APIKEY = "\(API.apiKey.rawValue)"
+    let APIKEY = "\(APIKeyPersonal.apiKey.rawValue)"
     
     enum EndPoints {
         case currentWeather(q: String)
