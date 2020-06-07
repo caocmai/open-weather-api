@@ -106,7 +106,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     func fetchWeather(city: String) {
-        network.getWeatherData(passedInQuery: city) { result in
+        network.getWeatherData(cityName: city) { result in
             
             switch result {
             case let .success(data):
@@ -114,8 +114,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let weatherId = data!.weather[0].id!
                 
                 let weatherCondition = data!.weather[0].description
-                
-                
                 
                 let weather = WeatherModel(conditionId: weatherId, cityName: (data?.name)!, temperature: (data?.main?.temp)!)
                 

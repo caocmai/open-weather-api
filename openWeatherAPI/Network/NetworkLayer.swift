@@ -31,20 +31,21 @@ class NetworkLayer {
             return "GET"
         }
         
-//        func getHeaders(secretKey: String) -> [String: String] {
-//
-//            return ["Accept": "application/json",
-//                    "Content-Type": "application/json",
-//                    "Authorization": "X-Api-Key \(secretKey)",
-//                    "Host": "api.openweathermap.org"
-//            ]
-//        }
+        func getHeaders(secretKey: String) -> [String: String] {
+
+            return ["Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": "X-Api-Key \(secretKey)",
+                    "Host": "api.openweathermap.org"
+            ]
+        }
         
         func getParams() -> [String:String] {
             switch self {
             case .currentWeather(let city):
                 return ["q": city,
-                        "units": "imperial"
+                        "units": "imperial",
+                        "appid": APIKeyPersonal.apiKey.rawValue
                         ]
             }
             
@@ -69,24 +70,23 @@ class NetworkLayer {
         case noData
     }
     
-    private func makeRequest(for endPoint: EndPoints) -> URL {
+    private func makeRequest(for endPoint: EndPoints) -> URLRequest {
         let path = endPoint.getPath() // Get the first part of URL
         let stringParams = endPoint.paramsToString()
-        let fullURL = URL(string: baseURL.appending("\(path)?\(stringParams)&appid=\(APIKEY)"))
+        let fullURL = URL(string: baseURL.appending("\(path)?\(stringParams)"))
 //                print(fullURL)
         var request = URLRequest(url: fullURL!)
         request.httpMethod = endPoint.getHTTPRequestMethod()
-//        request.allHTTPHeaderFields = endPoint.getHeaders(secretKey: APIKEY)
+        request.allHTTPHeaderFields = endPoint.getHeaders(secretKey: APIKEY)
 //                print("\(String(describing: request.allHTTPHeaderFields))")
-        return fullURL!
+        return request
         
     }
     
-    func getWeatherData(passedInQuery: String, _ completion: @escaping (Result<WeatherData>) -> Void)  {
-        let articleRequest = makeRequest(for: .currentWeather(q: passedInQuery))
-        print(articleRequest)
+    func getWeatherData(cityName: String, _ completion: @escaping (Result<WeatherData>) -> Void)  {
+        let weatheRequest = makeRequest(for: .currentWeather(q: cityName))
         
-        let task = urlSession.dataTask(with: articleRequest) { (data, response, error) in
+        let task = urlSession.dataTask(with: weatheRequest) { (data, response, error) in
             // If error
             if let error = error {
                 return completion(Result.failure(error))
