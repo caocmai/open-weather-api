@@ -13,9 +13,9 @@ import Foundation
 
 class NetworkLayer {
     
-    let baseURL = "http://api.openweathermap.org/data/2.5/"
-    let urlSession = URLSession.shared
-    let APIKEY = "\(APIKeyPersonal.apiKey.rawValue)"
+    static let baseURL = "http://api.openweathermap.org/data/2.5/"
+    static let urlSession = URLSession.shared
+    static let APIKEY = "\(APIKeyPersonal.apiKey.rawValue)"
     
     enum EndPoints {
         case currentWeather(q: String)
@@ -70,7 +70,7 @@ class NetworkLayer {
         case noData
     }
     
-    private func makeRequest(for endPoint: EndPoints) -> URLRequest {
+    static private func makeRequest(for endPoint: EndPoints) -> URLRequest {
         let path = endPoint.getPath() // Get the first part of URL
         let stringParams = endPoint.paramsToString()
         let fullURL = URL(string: baseURL.appending("\(path)?\(stringParams)"))
@@ -83,7 +83,7 @@ class NetworkLayer {
         
     }
     
-    func getWeatherData(cityName: String, _ completion: @escaping (Result<WeatherData>) -> Void)  {
+    static func getWeatherData(cityName: String, _ completion: @escaping (Result<WeatherData>) -> Void)  {
         let weatheRequest = makeRequest(for: .currentWeather(q: cityName))
         
         let task = urlSession.dataTask(with: weatheRequest) { (data, response, error) in
