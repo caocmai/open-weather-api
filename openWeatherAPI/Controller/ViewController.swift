@@ -46,6 +46,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return newLabel
     }()
     
+    let weatherDescriptionLabel: UILabel = {
+        let newLabel = UILabel()
+        newLabel.textAlignment = .center
+        newLabel.font = UIFont(name: "Helvetica", size: 20)
+        newLabel.textColor = .darkGray
+        newLabel.translatesAutoresizingMaskIntoConstraints = false
+        return newLabel
+    }()
+    
     let tempLabel: UILabel = {
         let newLabel = UILabel()
         newLabel.textAlignment = .center
@@ -77,7 +86,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         fetchWeather(city: properSearchQuery)
         textField.text = ""
         } else if textField.tag == 2 {
-            moodLabel.text = "Mood is \(textField.text!)"
+            moodLabel.text = "Today's mood is \(textField.text!)"
         }
         return true
     }
@@ -85,7 +94,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Current Weather"
+        navigationController?.navigationBar.prefersLargeTitles = true
         fetchWeather(city: "San%20Francisco")
         view.backgroundColor = .white
         configureUI()
@@ -97,6 +107,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         moodInput.delegate = self
         moodInput.tag = 2
         view.addSubview(image)
+        view.addSubview(weatherDescriptionLabel)
         view.addSubview(cityInput)
         view.addSubview(tempLabel)
         view.addSubview(cityLabel)
@@ -112,6 +123,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         ])
         
         NSLayoutConstraint.activate([
+            weatherDescriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            weatherDescriptionLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 1)
+        ])
+        
+        NSLayoutConstraint.activate([
             cityInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cityInput.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4)
         ])
@@ -119,7 +135,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             //            tempLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             tempLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tempLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10)
+            tempLabel.topAnchor.constraint(equalTo: weatherDescriptionLabel.bottomAnchor, constant: 10)
         ])
         
         NSLayoutConstraint.activate([
@@ -150,12 +166,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 //                print(weather?.weather.description)
                 let weatherId = data!.weather[0].id!
                 
-//                let weatherCondition = data!.weather[0].description
+                let weatherCondition = data!.weather[0].description
+                self.weatherDescriptionLabel.text = weatherCondition
                 let weather = WeatherModel(conditionId: weatherId, cityName: (data?.name)!, temperature: (data?.main?.temp)!)
                 
                 print(weather.getTemp)
-                //                print(weather.conditionName)
-                self.tempLabel.text = weather.getTemp
+//                                print(weather.conditionName)
+                self.tempLabel.text = ("\(weather.getTemp) F")
                 self.cityLabel.text = data?.name
                 
                 self.image.image = UIImage(systemName: weather.conditionName)
