@@ -17,3 +17,11 @@ Project code can be viewed locally  and run on Xcode's simulator by downloading/
 * [Xcode - 11.3.1](https://developer.apple.com/xcode/) - The IDE used
 * [Swift - 5.1.4](https://developer.apple.com/swift/) - Programming Language
 
+## Note
+In order to run this project you need to have a file called APIKeyPersonal.swift and in that file add the following along with your unique api key.
+
+```swift
+enum APIKeyPersonal: String {
+    case apiKey = "your-unique-api-key-goes-here"
+}
+```
