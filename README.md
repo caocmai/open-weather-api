@@ -18,7 +18,7 @@ Project code can be viewed locally  and run on Xcode's simulator by downloading/
 * [Swift - 5.1.4](https://developer.apple.com/swift/) - Programming Language
 
 ## Note
-In order to run this project you need to have a file called APIKeyPersonal.swift and in that file add the following along with your unique api key.
+In order to run this project you need to have a file called APIKeyPersonal.swift and in that file add the following along with your unique api key from the [Open Weather API](https://openweathermap.org/api).
 
 ```swift
 enum APIKeyPersonal: String {
