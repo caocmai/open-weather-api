@@ -22,6 +22,6 @@ In order to run this project you need to have a file called APIKeyPersonal.swift
 
 ```swift
 enum APIKeyPersonal: String {
-    case apiKey = "your-unique-api-key-goes-here"
+    case apiKey = "your-unique-api-key-goes-between-these-quotes"
 }
 ```
